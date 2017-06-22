@@ -16,6 +16,13 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "clocale": "cpp",
-        "*.rh": "cpp"
+        "*.rh": "cpp",
+        "array": "cpp",
+        "valarray": "cpp",
+        "chrono": "cpp",
+        "functional": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp"
     }
 }

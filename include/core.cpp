@@ -22,7 +22,7 @@
 
 namespace core {
 	namespace filesystem { // Functions used to read and modify the file system of the user.
-		bool fileExists (const std::string& fileName) // Used to check if a certain file exists with a certain directory
+		bool fileExists (const std::string &fileName) // Used to check if a certain file exists with a certain directory
 		{
 			struct stat buffer;
 			return (stat (fileName.c_str(), &buffer) == 0);
@@ -60,7 +60,7 @@ namespace core {
 			return max.ws.col
 #endif
 		}
-		void toggleEcho(bool enable) //Stops the console from printing anything if disabled.
+		void toggleEcho(const bool &enable) //Stops the console from printing anything if disabled.
 		{
 #if defined(Windows)
 			HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
@@ -97,9 +97,9 @@ namespace core {
 #endif
 			return password;
 		}
-		void executeCommand(std::string command)
+		void executeCommand(const char &command)
 		{
-			//system()
+			//system(command);
 		}
 	}
 	void save() // Serialize namespace player, you can change this to another namespace or object
@@ -164,7 +164,7 @@ namespace core {
 		std::cout << termcolor::reset;
 	}
 
-	int createMenu(std::string title, std::vector<std::string> menuContent, bool backEnabled) // Creates a menu without using the nCurses library, not likely to be efficient. Still needs linux code.
+	int createMenu(const std::string &title, const std::vector<std::string> &menuContent, const bool &backEnabled) // Creates a menu without using the nCurses library, not likely to be efficient. Still needs linux code.
 	{
 		core::clear();
 		int numberOfOptions = menuContent.size() - 1;
