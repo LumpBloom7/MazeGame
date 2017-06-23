@@ -67,19 +67,21 @@ namespace core {
 			DWORD mode;
 			GetConsoleMode(hStdin, &mode);
 
-			if( !enable )
+			if( not enable ) {
 				mode &= ~ENABLE_ECHO_INPUT;
-			else
+			} else {
 				mode |= ENABLE_ECHO_INPUT;
+			}
 
 			SetConsoleMode(hStdin, mode );
 #else
 			struct termios tty;
 			tcgetattr(STDIN_FILENO, &tty);
-			if( !enable )
+			if( not enable ) {
 				tty.c_lflag &= ~ECHO;
-			else
+			} else {
 				tty.c_lflag |= ECHO;
+			}
 
 			(void) tcsetattr(STDIN_FILENO, TCSANOW, &tty);
 #endif
@@ -104,7 +106,7 @@ namespace core {
 	}
 	void save() // Serialize namespace player, you can change this to another namespace or object
 	{
-		std::string password {};
+		std::string password;
 		std::ofstream os(("saveData/" + player::userName + ".json"));
 		cereal::JSONOutputArchive archive(os);
 
@@ -118,7 +120,7 @@ namespace core {
 		std::cout << "Please enter your userName: " << std::flush;
 		std::cin >> userName;
 		if(core::filesystem::fileExists("saveData/" + userName + ".json")) {
-			std::string password {""};
+			std::string password;
 			std::ifstream is("saveData/" + userName + ".json");
 			cereal::JSONInputArchive archive(is);
 			archive(player::userName, player::password, player::experience);
@@ -187,8 +189,9 @@ namespace core {
 		while(true) {
 			if((GetAsyncKeyState ( VK_UP ) & SHRT_MAX) && failcheck) {
 				pointerCoord--;
-				if(pointerCoord < 0)
+				if(pointerCoord < 0) {
 					pointerCoord = numberOfOptions;
+				}
 				core::clear();
 				std::cout << termcolor::bold << termcolor::underline
 				          << title << termcolor::reset << std::endl;
@@ -205,8 +208,9 @@ namespace core {
 
 			} else if((GetAsyncKeyState ( VK_DOWN ) & SHRT_MAX) && failcheck)  {
 				pointerCoord++;
-				if(pointerCoord > numberOfOptions)
+				if(pointerCoord > numberOfOptions) {
 					pointerCoord = 0;
+				}
 				core::clear();
 				std::cout << termcolor::bold << termcolor::underline
 				          << title << termcolor::reset << std::endl;

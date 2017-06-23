@@ -1,6 +1,9 @@
 Geocaching Maze changelogs
 ===========================
 
+#### 23/06/2017
+ * [+] Code style improvements.
+
 #### 22/06/2017
  * [+] Teleporter mechanics added. Teleporters can be added to the maze via ```MazeObstacle``` class when the type is set to ```'t'```. Maze creators must also specify the teleportLocation in order for the teleporter to function correctly.
  * [+] ```Coord``` class now have basic operators for comparisons and simple maths.

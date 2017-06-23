@@ -7,7 +7,10 @@ This is a game created as the first challenge for a cache in Geocaching. It is a
 Latest update
 ==========
 Full changelogs can be found in CHANGELOGS.md
-#### 21/06/2017
+#### 23/06/2017
+ * [+] Code style improvements.
+
+#### 22/06/2017
  * [+] Teleporter mechanics added. Teleporters can be added to the maze via ```MazeObstacle``` class when the type is set to ```'t'```. Maze creators must also specify the teleportLocation in order for the teleporter to function correctly.
  * [+] ```Coord``` class now have basic operators for comparisons and simple maths.
  * [+] Partial implementation of maze triggers, used for buttons or automation within the maze. The implementation can be found in ```Trigger``` class.

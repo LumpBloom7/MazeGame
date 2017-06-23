@@ -1,53 +1,50 @@
 // Class created to handle xy coordinates in a more practical manner.
 class Coord {
 	public:
-		Coord(const int &X,const int &Y)
-		{
-			x = X;
-			y = Y;
-		}
-		Coord()
-		{
-			x = 0;
-			y = 0;
-		}
+		Coord(const int &X,const int &Y): x(X), y(Y) {}
+		Coord() {}
 		int x, y;
 
 		// Since the maze reads maze coordinates from the top left, it is pointless to compare reverse scenarios.
 		bool operator>(const Coord &b)
 		{
-			if((this->x > b.x) && (this->y > b.y))
+			if((this->x > b.x) && (this->y > b.y)) {
 				return true;
-			else
+			} else {
 				return false;
+			}
 		}
 		bool operator>=(const Coord &b)
 		{
-			if((this->x >= b.x) && (this->y >= b.y))
+			if((this->x >= b.x) && (this->y >= b.y)) {
 				return true;
-			else
+			} else {
 				return false;
+			}
 		}
 		bool operator<(const Coord &b)
 		{
-			if((this->x < b.x) && (this->y < b.y))
+			if((this->x < b.x) && (this->y < b.y)) {
 				return true;
-			else
+			} else {
 				return false;
+			}
 		}
 		bool operator<=(const Coord &b)
 		{
-			if((this->x <= b.x) && (this->y <= b.y))
+			if((this->x <= b.x) && (this->y <= b.y)) {
 				return true;
-			else
+			} else {
 				return false;
+			}
 		}
 		bool operator==(const Coord &b)
 		{
-			if((this->x == b.x) && (this->y == b.y))
+			if((this->x == b.x) && (this->y == b.y)) {
 				return true;
-			else
+			} else {
 				return false;
+			}
 		}
 		Coord operator-(const Coord &b)
 		{
@@ -90,30 +87,11 @@ enum TriggerType {
 
 // Class to represent Special triggers used in the maze, for stuff like opening/closing doors, moving walls etc.
 class Trigger {
-		Trigger(const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd)
-		{
-			triggerCoordStart = start;
-			triggerCoordEnd = end;
-			targetCoordStart = targetStart;
-			targetCoordEnd = targetEnd;
-		}
-		Trigger(const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd, const bool &pushActivation)
-		{
-			triggerCoordStart = start;
-			triggerCoordEnd = end;
-			targetCoordStart = targetStart;
-			targetCoordEnd = targetEnd;
-			pushToActivate = pushActivation;
-		}
-		Trigger(const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd, const bool &pushActivation, const bool &toggleable)
-		{
-			triggerCoordStart = start;
-			triggerCoordEnd = end;
-			targetCoordStart = targetStart;
-			targetCoordEnd = targetEnd;
-			pushToActivate = pushActivation;
-			toggle = toggleable;
-		}
+		// Constructors
+		Trigger(const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd) : triggerCoordStart(start), triggerCoordEnd(end), targetCoordStart(targetStart), targetCoordEnd(targetEnd) {}
+		Trigger(const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd, const bool &pushActivation) : triggerCoordStart(start), triggerCoordEnd(end), targetCoordStart(targetStart), targetCoordEnd(targetEnd), pushToActivate(pushActivation) {}
+		Trigger(const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd, const bool &pushActivation, const bool &toggleable) : triggerCoordStart(start), triggerCoordEnd(end), targetCoordStart(targetStart), targetCoordEnd(targetEnd), pushToActivate(pushActivation), toggle(toggleable) {}
+
 		Coord getTriggerStart()
 		{
 			return triggerCoordStart;
@@ -158,27 +136,11 @@ class Trigger {
 // Class to represent obstacles that can be encountered in the maze, like walls, traps etc. Does not include entities like monsters and items.
 class MazeObstacle {
 	public:
-		MazeObstacle(const char &Type, const Coord &Start, const Coord &End)
-		{
-			start = Start;
-			end = End;
-			type = Type;
-		}
-		MazeObstacle(const char &Type, const Coord &Start, const Coord &End, const Coord &teleportLocation)
-		{
-			start = Start;
-			end = End;
-			type = Type;
-			telLoc = teleportLocation;
-		}
-		MazeObstacle(const char &Type, const Coord &Start, const Coord &End, const Coord &teleportLocation, const bool &oneTimeUse)
-		{
-			start = Start;
-			end = End;
-			type = Type;
-			singleUse = oneTimeUse;
-			telLoc = teleportLocation;
-		}
+		// Constructors
+		MazeObstacle(const char &Type, const Coord &Start, const Coord &End) : start(Start), end(End), type(Type) {}
+		MazeObstacle(const char &Type, const Coord &Start, const Coord &End, const Coord &teleportLocation) : start(Start), end(End), type(Type), telLoc(teleportLocation) {}
+		MazeObstacle(const char &Type, const Coord &Start, const Coord &End, const Coord &teleportLocation, const bool &oneTimeUse) : start(Start), end(End), type(Type), telLoc(teleportLocation), singleUse(oneTimeUse) {}
+
 		char getType()
 		{
 			return type;
@@ -211,19 +173,10 @@ class Maze {
 		Coord endPos;
 		std::vector<MazeObstacle> mazeInfo{};
 	public:
-		Maze()
-		{
-			width = 10;
-			height = 10;
-			startPos = Coord(0, 0);
-		}
-		Maze(const int &Width, const int &Height, const Coord &playerStart, const Coord &playerEnd)
-		{
-			width = Width;
-			height = Height;
-			startPos = playerStart;
-			endPos = playerEnd;
-		}
+		// Constructors
+		Maze(): width(10), height(10), startPos(Coord(0, 0)) {}
+		Maze(const int &Width, const int &Height, const Coord &playerStart, const Coord &playerEnd) : width(Width), height(Height), startPos(playerStart), endPos(playerEnd) {}
+
 		// Add generic obstacle to maze
 		void addObstacle(const char &Type, const Coord &Start, const Coord &End)
 		{
