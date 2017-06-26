@@ -1,6 +1,8 @@
 Geocaching Maze
 ===============
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6bfb6b47b30a47c29c33a4481190848e)](https://www.codacy.com/app/LumpBloom7/MazeGame?utm_source=github.com&utm_medium=referral&utm_content=LumpBloom7/MazeGame&utm_campaign=badger)
+
 This is a game created as the first challenge for a cache in Geocaching. It is a maze game where the goal is to find the Geocache in the maze while avoiding obstacles and difficulties. There are a total of 10 mazes and a code will be given afterwards for the second challenge.
 
 
