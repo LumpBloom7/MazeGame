@@ -14,7 +14,7 @@ echo Creating object file.
 
 echo Creating executable
 if exist bin\debug\main.o (
-    %CD:~0,2%/Compilers/MingW64_4.9.2/bin/g++.exe -D__DEBUG__ bin/Debug/main.o -o bin/Debug/Geocaching.exe -L"%CD:~0,2%/Compilers/mingw64/lib32" -L"%CD:~0,2%/Compilers/mingw64/x86_64-w64-mingw32/lib32" -static-libgcc -m32 -pg -g3
+    %CD:~0,2%/Compilers/MingW64_4.9.2/bin/g++.exe -D__DEBUG__ bin/Debug/main.o -o bin/Debug/Geocaching.exe -static-libgcc -m32 -pg -g3
 ) 
 
 ::Record end time && calculate duration

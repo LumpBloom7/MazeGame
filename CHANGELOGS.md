@@ -1,6 +1,10 @@
 Geocaching Maze changelogs
 ===========================
 
+#### 02/07/2017
+ * [+] Redone code formatting to closely match LLVM style
+ * [+] Made it so that the ```Build64.bat``` file also outputs the file with the same name.
+
 #### 23/06/2017
  * [+] Code style improvements.
 

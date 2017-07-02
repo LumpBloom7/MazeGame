@@ -9,6 +9,10 @@ This is a game created as the first challenge for a cache in Geocaching. It is a
 Latest update
 ==========
 Full changelogs can be found in CHANGELOGS.md
+#### 02/07/2017
+ * [+] Redone code formatting to closely match LLVM style
+ * [+] Made it so that the ```Build64.bat``` file also outputs the file with the same name.
+
 #### 23/06/2017
  * [+] Code style improvements.
 

@@ -1,7 +1,7 @@
 @echo off
 echo Deleting executable and object file
 
-%CD:~0,2%/Compilers/MinGW64_4.9.2/bin/rm.exe bin\Debug\Kroz.exe bin\Debug\main.o 
+%CD:~0,2%/Compilers/MinGW64_4.9.2/bin/rm.exe bin\Debug\Geocaching.exe bin\Debug\main.o 
 
 set start=%time% ::Record start time
 
@@ -14,7 +14,7 @@ echo Creating object file.
 
 echo Creating executable
 if exist bin\debug\main.o (
-    %CD:~0,2%/Compilers/MingW64_4.9.2/bin/g++.exe -D__DEBUG__ bin/Debug/main.o -o bin/Debug/Kroz.exe -L"%CD:~0,2%/Compilers/mingw64/lib32" -L"%CD:~0,2%/Compilers/mingw64/x86_64-w64-mingw32/lib32" -static-libgcc -pg -g3
+    %CD:~0,2%/Compilers/MingW64_4.9.2/bin/g++.exe -D__DEBUG__ bin/Debug/main.o -o bin/Debug/Geocaching.exe -L -static-libgcc -pg -g3
 ) 
 
 ::Record end time && calculate duration
@@ -38,7 +38,7 @@ set /a totalsecs = %hours%*3600 + %mins%*60 + %secs%
 ::echo command took %hours%:%mins%:%secs%.%ms% (%totalsecs%.%ms%s total)
 
 :: Get file size
-set file="bin\Debug\Kroz.exe"
+set file="bin\Debug\Geocaching.exe"
 FOR /F "usebackq" %%A IN ('%file%') DO set size=%%~zA
 set /a result=(size/1024)
 
@@ -62,9 +62,9 @@ set "fileSize=%sign%%var2:~1%
 echo.
 echo Compilation results...
 echo --------
-if exist bin/Debug/Kroz.exe (
+if exist bin/Debug/Geocaching.exe (
     echo - Successful!
-    echo - Output Filename: %cd%\bin\Debug\Kroz.exe
+    echo - Output Filename: %cd%\bin\Debug\Geocaching.exe
     echo - Output Size: %fileSize% KiB
 ) else (
     echo Failed!
