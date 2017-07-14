@@ -3,7 +3,6 @@ class Coord {
 public:
   Coord( const int &X, const int &Y ) : x( X ), y( Y ) {}
   Coord() {}
-  int x, y;
 
   // Since the maze reads maze coordinates from the top left, it is pointless to compare reverse scenarios.
   bool operator>( const Coord &b ) {
@@ -65,12 +64,26 @@ public:
     temp.y = this->x + b;
     return temp;
   }
+  Coord operator++() {
+    Coord temp;
+    temp.x = this->x + 1;
+    temp.y = this->y + 1;
+    return temp;
+  }
+  Coord operator--() {
+    Coord temp;
+    temp.x = this->x + 1;
+    temp.y = this->y + 1;
+    return temp;
+  }
+  int x, y;
 };
-
+enum ObstacleType { wall = 0, spike = 1, enemy = 2 };
 enum TriggerType { destroy = 0, create = 1, deactivate = 2, activate = 3, kill = 4 };
 
 // Class to represent Special triggers used in the maze, for stuff like opening/closing doors, moving walls etc.
 class Trigger {
+public:
   // Constructors
   Trigger( const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd )
       : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
@@ -83,18 +96,32 @@ class Trigger {
            const bool &pushActivation, const bool &toggleable )
       : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
         targetCoordEnd( targetEnd ), pushToActivate( pushActivation ), toggle( toggleable ) {}
+  Trigger( const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd,
+           const ObstacleType &create )
+      : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
+        targetCoordEnd( targetEnd ), creationObject( create ) {}
+  Trigger( const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd,
+           const ObstacleType &create, const bool &pushActivation )
+      : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
+        targetCoordEnd( targetEnd ), creationObject( create ), pushToActivate( pushActivation ) {}
+  Trigger( const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd,
+           const ObstacleType &create, const bool &pushActivation, const bool &toggleable )
+      : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
+        targetCoordEnd( targetEnd ), creationObject( create ), pushToActivate( pushActivation ), toggle( toggleable ) {}
 
   Coord getTriggerStart() { return triggerCoordStart; }
   Coord getTriggerEnd() { return triggerCoordEnd; }
   Coord getTargetStart() { return targetCoordStart; }
   Coord getTargetEnd() { return targetCoordEnd; }
   TriggerType getType() { return type; }
+  ObstacleType getCreationObject() { return creationObject; }
   bool isPushActivate() { return pushToActivate; }
   bool isToggleable() { return toggle; }
   bool isActivated() { return activated; }
 
 private:
   TriggerType type;
+  ObstacleType creationObject;
   Coord targetCoordStart, targetCoordEnd;
   Coord triggerCoordStart, triggerCoordEnd;
   bool pushToActivate;
@@ -159,6 +186,31 @@ public:
   std::vector<MazeObstacle> getMazeInfo() { return mazeInfo; }
 };
 
+class Enemy {
+public:
+  Enemy() : position( 0, 0 ) {}
+  Enemy( Coord &Position ) : position( Position ) {}
+  Enemy( Coord &Position, int &Health ) : position( Position ), health( Health ) {}
+  Enemy( Coord &Position, bool &playerSpotted ) : position( Position ), seenPlayer( playerSpotted ) {}
+  Enemy( Coord &Position, int &Health, bool &playerSpotted )
+      : position( Position ), health( Health ), seenPlayer( playerSpotted ) {}
+  void moveAI() {
+    if ( not seenPlayer ) {
+      // Do nothing if player has not been spotted.
+    } else if ( seenPlayer ) {
+      // Go to the players location.
+    }
+  };
+
+private:
+  Coord position;
+  int health = 100;
+  int damageMultiplier = 1;
+  int defenseMultiplier = 1;
+  bool seenPlayer = false;
+};
+class PathfindingMap {};
+
 void optimizeMaze();
 
 void renderMaze(); // Prints the maze generated.
@@ -168,9 +220,7 @@ void mazeParser( Maze &input ); // Used to turn maze infomation from human reada
 int mazeGame(); // Main handler for user activities.
 
 Coord moveUp( const Coord &playerPos );
-
 Coord moveDown( const Coord &playerPos );
-
 Coord moveLeft( const Coord &playerPos );
-
 Coord moveRight( const Coord &playerPos );
+void triggerProcessor( Trigger &trigger );

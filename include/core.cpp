@@ -21,7 +21,7 @@
 #endif
 
 namespace core {
-  namespace filesystem { // Functions used to read and modify the file system of the user.
+  namespace filesystem {                           // Functions used to read and modify the file system of the user.
     bool fileExists( const std::string &fileName ) // Used to check if a certain file exists with a certain directory
     {
       struct stat buffer;
@@ -100,9 +100,7 @@ namespace core {
 #endif
       return password;
     }
-    void executeCommand( const char &command ) {
-      // system(command);
-    }
+    // void executeCommand( const char &command ) { system( command ); }
   }
   void save() // Serialize namespace player, you can change this to another namespace or object
   {

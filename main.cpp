@@ -1,11 +1,11 @@
 #include <iostream> // For IO functionality
-#include <vector> // For Vector functionality
-#include <memory> // For memory management, includes std::shared_ptr and std::unique_ptr
-#include <string> // For string variable
+#include <vector>   // For Vector functionality
+#include <memory>   // For memory management, includes std::shared_ptr and std::unique_ptr
+#include <string>   // For string variable
 
 #include "termcolor.hpp" // This header contains the functionality of adding colors to 'std::cout'.
-#include "player.hpp" // This header contains the namespace used to store player data and progress.
-#include "core.cpp" // This header contains the core functionality of the game engine.
+#include "player.hpp"    // This header contains the namespace used to store player data and progress.
+#include "core.cpp"      // This header contains the core functionality of the game engine.
 #include "Mazes.cpp"
 
 void newGame(), continueGame(), showInstructions(), workInProgress(), errorMessage(), debugMode();
@@ -17,9 +17,8 @@ int main() {
   case 1: continueGame(); break;
   case 2: showInstructions(); break;
   case 3:
-    // Open Geocaching page;
     workInProgress();
-    break;
+    break; // Add webpage redirect here.
   case 4: exit( 0 ); break;
   case 5: debugMode(); break;
   default: errorMessage(); break;
@@ -72,7 +71,7 @@ void errorMessage() {
 }
 void debugMode() {
   core::clear();
-  Maze test = Maze( 5, 5, Coord( 0, 0 ), Coord( 3, 6 ) );
+  Maze test = Maze( 10, 10, Coord( 0, 0 ), Coord( 3, 6 ) );
   test.addObstacle( 'w', Coord( 1, 2 ), Coord( 1, 4 ) );
   test.addObstacle( 'w', Coord( 4, 0 ), Coord( 4, 4 ) );
   test.addObstacle( 'w', Coord( 3, 2 ), Coord( 3, 3 ) );

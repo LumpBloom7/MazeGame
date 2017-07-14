@@ -154,3 +154,26 @@ Coord moveRight( const Coord &playerPos ) {
     return Coord( playerPos.x + 1, playerPos.y );
   }
 }
+void triggerProcessor( Trigger &trigger ) {
+  if ( trigger.getType() == TriggerType::destroy ) {
+    for ( int a = trigger.getTargetStart().y + 1; a <= trigger.getTargetEnd().y + 1; a++ ) {
+      for ( int b = trigger.getTargetStart().x + 1; b <= trigger.getTargetEnd().x + 1; b++ ) {
+        parsedMaze[ a ][ b ] == ' ';
+      }
+    }
+  } else if ( trigger.getType() == TriggerType::create ) {
+    for ( int a = trigger.getTargetStart().y + 1; a <= trigger.getTargetEnd().y + 1; a++ ) {
+      for ( int b = trigger.getTargetStart().x + 1; b <= trigger.getTargetEnd().x + 1; b++ ) {
+        if ( trigger.getCreationObject() == ObstacleType::wall ) {
+          parsedMaze[ a ][ b ] == 'w';
+        } else if ( trigger.getCreationObject() == ObstacleType::spike ) {
+          parsedMaze[ a ][ b ] == 's';
+        } else if ( trigger.getCreationObject() == ObstacleType::enemy ) {
+          // Add enemy entity.
+        }
+      }
+    }
+  } else if ( trigger.getType() == TriggerType::kill ) {
+    // Kill target entity.
+  }
+}

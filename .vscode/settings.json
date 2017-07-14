@@ -25,6 +25,7 @@
         "tuple": "cpp",
         "utility": "cpp",
         "memory": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "fstream": "cpp"
     }
 }
