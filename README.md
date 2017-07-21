@@ -8,7 +8,13 @@ This is a game created as the first challenge for a cache in Geocaching. It is a
 
 Latest update
 ==========
-Full changelogs can be found in CHANGELOGS.md
+
+
+#### 21/07/2017
+ * [+] Tidied up core.cpp. All OS specific calls are now in their own independent code files and is appropriately called during compilation.
+ * [+] Menus should now work on Linux since the Linux code to get arrow key input is implemented.
+ * [+] Arrow key input is now handled by ```core::getArrowInput()```.
+
 #### 02/07/2017
  * [+] Redone code formatting to closely match LLVM style
  * [+] Made it so that the ```Build64.bat``` file also outputs the file with the same name.
@@ -16,8 +22,4 @@ Full changelogs can be found in CHANGELOGS.md
 #### 23/06/2017
  * [+] Code style improvements.
 
-#### 22/06/2017
- * [+] Teleporter mechanics added. Teleporters can be added to the maze via ```MazeObstacle``` class when the type is set to ```'t'```. Maze creators must also specify the teleportLocation in order for the teleporter to function correctly.
- * [+] ```Coord``` class now have basic operators for comparisons and simple maths.
- * [+] Partial implementation of maze triggers, used for buttons or automation within the maze. The implementation can be found in ```Trigger``` class.
- * [+] Added a few comments to help explain the use of each function.
+ Full changelogs can be found in CHANGELOGS.md

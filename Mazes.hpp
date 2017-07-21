@@ -184,6 +184,10 @@ public:
   Coord getStartPos() { return startPos; }
   Coord getEndPos() { return endPos; }
   std::vector<MazeObstacle> getMazeInfo() { return mazeInfo; }
+  void showWalkthrough() {
+    int a, b, c, d;
+    // a = move
+  }
 };
 
 class Enemy {
@@ -194,13 +198,29 @@ public:
   Enemy( Coord &Position, bool &playerSpotted ) : position( Position ), seenPlayer( playerSpotted ) {}
   Enemy( Coord &Position, int &Health, bool &playerSpotted )
       : position( Position ), health( Health ), seenPlayer( playerSpotted ) {}
-  void moveAI() {
-    if ( not seenPlayer ) {
-      // Do nothing if player has not been spotted.
-    } else if ( seenPlayer ) {
-      // Go to the players location.
-    }
-  };
+  /*void solvemaze() { // Make the move (if it's wrong, we will backtrack later.
+    Maze[ Y ][ X ] = SomeDude;
+
+    // If you want progressive update, uncomment these lines...
+    // PrintDaMaze();
+    // Sleep(50);
+
+    // Check if we have reached our goal.
+    if ( X == EndingPoint.X && Y == EndingPoint.Y ) { return true; }
+
+    // Recursively search for our goal.
+    if ( X > 0 && Maze[ Y ][ X - 1 ] == Free && Solve( X - 1, Y ) ) { return true; }
+    if ( X < MazeWidth && Maze[ Y ][ X + 1 ] == Free && Solve( X + 1, Y ) ) { return true; }
+    if ( Y > 0 && Maze[ Y - 1 ][ X ] == Free && Solve( X, Y - 1 ) ) { return true; }
+    if ( Y < MazeHeight && Maze[ Y + 1 ][ X ] == Free && Solve( X, Y + 1 ) ) { return true; }
+
+    // Otherwise we need to backtrack and find another solution.
+    Maze[ Y ][ X ] = Free;
+    // If you want progressive update, uncomment these lines...
+    // PrintDaMaze();
+    // Sleep(50);
+    return false;
+  }*/
 
 private:
   Coord position;
@@ -223,4 +243,5 @@ Coord moveUp( const Coord &playerPos );
 Coord moveDown( const Coord &playerPos );
 Coord moveLeft( const Coord &playerPos );
 Coord moveRight( const Coord &playerPos );
+
 void triggerProcessor( Trigger &trigger );

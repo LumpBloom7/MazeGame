@@ -80,4 +80,5 @@ void debugMode() {
   mazeGame();
   std::cin.ignore();
   std::cin.ignore();
+  std::cout << termcolor::reset;
 }

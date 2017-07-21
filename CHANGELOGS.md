@@ -1,6 +1,11 @@
 Geocaching Maze changelogs
 ===========================
 
+#### 21/07/2017
+ * [+] Tidied up core.cpp. All OS specific calls are now in their own independent code files and is appropriately called during compilation.
+ * [+] Menus should now work on Linux since the Linux code to get arrow key input is implemented.
+ * [+] Arrow key input is now handled by ```core::getArrowInput()```.
+
 #### 02/07/2017
  * [+] Redone code formatting to closely match LLVM style
  * [+] Made it so that the ```Build64.bat``` file also outputs the file with the same name.
@@ -20,8 +25,8 @@ Geocaching Maze changelogs
  * [+] First test maze added. This could be accessed from ```Main menu > Debug mode```
  * [+] Basic controls added.
  * [+] Maze renderer added. This outputs the current state of the maze into the console. Currently uses letters to correspond maze elements.
- * [+] Maze parser added. This parses the ```Maze``` class into a 2D vector for gameplay. 
- * [+] Added the maze framework. The ```Maze``` class is implented in a way which it'll only require the size of the maze and where the obstacles are instead of hard-coding an array for the maze. 
+ * [+] Maze parser added. This parses the ```Maze``` class into a 2D vector for gameplay.
+ * [+] Added the maze framework. The ```Maze``` class is implented in a way which it'll only require the size of the maze and where the obstacles are instead of hard-coding an array for the maze.
 
 #### 08/05/2017
  * Initial commit
