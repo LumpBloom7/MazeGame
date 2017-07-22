@@ -1,6 +1,9 @@
 Geocaching Maze changelogs
 ===========================
 
+#### 22/07/2017
+ * [+] Made maze controls use the new ```getArrowInput()``` function.
+
 #### 21/07/2017
  * [+] Tidied up core.cpp. All OS specific calls are now in their own independent code files and is appropriately called during compilation.
  * [+] Menus should now work on Linux since the Linux code to get arrow key input is implemented.

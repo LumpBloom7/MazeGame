@@ -9,6 +9,8 @@ This is a game created as the first challenge for a cache in Geocaching. It is a
 Latest update
 ==========
 
+#### 22/07/2017
+ * [+] Made maze controls use the new ```getArrowInput()``` function.
 
 #### 21/07/2017
  * [+] Tidied up core.cpp. All OS specific calls are now in their own independent code files and is appropriately called during compilation.
@@ -19,7 +21,5 @@ Latest update
  * [+] Redone code formatting to closely match LLVM style
  * [+] Made it so that the ```Build64.bat``` file also outputs the file with the same name.
 
-#### 23/06/2017
- * [+] Code style improvements.
 
  Full changelogs can be found in CHANGELOGS.md
