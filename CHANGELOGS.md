@@ -1,6 +1,11 @@
 Geocaching Maze changelogs
 ===========================
 
+#### 24/07/2017
+ * [+] ```core::createMenu()``` now uses switch cases to get key input and do the appropriate stuff.
+ * [+] ```getArrowInput()``` had now been renamed to ```getKeyInput()``` to accurately match its actual function.
+ * [+] The ```ArrowKeys``` enumerator has been renamed to ```Keys``` because it does not only contain arrowKeys.
+
 #### 22/07/2017
  * [+] Made maze controls use the new ```getArrowInput()``` function.
 

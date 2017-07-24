@@ -81,4 +81,5 @@ void debugMode() {
   std::cin.ignore();
   std::cin.ignore();
   std::cout << termcolor::reset;
+  main();
 }

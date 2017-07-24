@@ -58,8 +58,8 @@ int mazeGame() {
   renderMaze();
   bool failcheck{};
   while ( true ) {
-    core::ArrowKeys input = core::getArrowInput();
-    if ( input == core::ArrowKeys::up && failcheck ) {
+    core::Keys input = core::getKeyInput();
+    if ( input == core::Keys::up && failcheck ) {
       playerPos = moveUp( playerPos );
       renderMaze();
       if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
@@ -67,21 +67,21 @@ int mazeGame() {
         break;
       }
 
-    } else if ( input == core::ArrowKeys::down && failcheck ) {
+    } else if ( input == core::Keys::down && failcheck ) {
       playerPos = moveDown( playerPos );
       renderMaze();
       if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
         std::cout << termcolor::green << "You win!!!" << std::endl;
         break;
       }
-    } else if ( input == core::ArrowKeys::left && failcheck ) {
+    } else if ( input == core::Keys::left && failcheck ) {
       playerPos = moveLeft( playerPos );
       renderMaze();
       if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
         std::cout << termcolor::green << "You win!!!" << std::endl;
         break;
       }
-    } else if ( input == core::ArrowKeys::right && failcheck ) {
+    } else if ( input == core::Keys::right && failcheck ) {
       playerPos = moveRight( playerPos );
       renderMaze();
       if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
