@@ -133,7 +133,7 @@ namespace core {
         return pointerCoord;
       }
       case Keys::escape: {
-        if ( backEnabled ) return -1;
+        if ( backEnabled ) { return -1 };
       }
       }
     }
