@@ -13,6 +13,8 @@ Latest update
  * [+] ```core::createMenu()``` now uses switch cases to get key input and do the appropriate stuff.
  * [+] ```getArrowInput()``` had now been renamed to ```getKeyInput()``` to accurately match its actual function.
  * [+] The ```ArrowKeys``` enumerator has been renamed to ```Keys``` because it does not only contain arrowKeys.
+ * [+] Fixed ```Trigger::type``` not being initialized in constructors.
+ * [+] Fixed up minor code styling inconsistencies.
 
 #### 22/07/2017
  * [+] Made maze controls use the new ```getArrowInput()``` function.

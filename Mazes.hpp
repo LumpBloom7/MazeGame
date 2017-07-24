@@ -85,28 +85,29 @@ enum TriggerType { destroy = 0, create = 1, deactivate = 2, activate = 3, kill =
 class Trigger {
 public:
   // Constructors
-  Trigger( const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd )
-      : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
+  Trigger( const TriggerType &triggerType, const Coord &start, const Coord &end, const Coord &targetStart,
+           const Coord &targetEnd )
+      : type( triggerType ), triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
         targetCoordEnd( targetEnd ) {}
-  Trigger( const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd,
-           const bool &pushActivation )
-      : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
+  Trigger( const TriggerType &triggerType, const Coord &start, const Coord &end, const Coord &targetStart,
+           const Coord &targetEnd, const bool &pushActivation )
+      : type( triggerType ), triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
         targetCoordEnd( targetEnd ), pushToActivate( pushActivation ) {}
-  Trigger( const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd,
-           const bool &pushActivation, const bool &toggleable )
-      : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
+  Trigger( const TriggerType &triggerType, const Coord &start, const Coord &end, const Coord &targetStart,
+           const Coord &targetEnd, const bool &pushActivation, const bool &toggleable )
+      : type( triggerType ), triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
         targetCoordEnd( targetEnd ), pushToActivate( pushActivation ), toggle( toggleable ) {}
-  Trigger( const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd,
-           const ObstacleType &create )
-      : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
+  Trigger( const TriggerType &triggerType, const Coord &start, const Coord &end, const Coord &targetStart,
+           const Coord &targetEnd, const ObstacleType &create )
+      : type( triggerType ), triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
         targetCoordEnd( targetEnd ), creationObject( create ) {}
-  Trigger( const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd,
-           const ObstacleType &create, const bool &pushActivation )
-      : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
+  Trigger( const TriggerType &triggerType, const Coord &start, const Coord &end, const Coord &targetStart,
+           const Coord &targetEnd, const ObstacleType &create, const bool &pushActivation )
+      : type( triggerType ), triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
         targetCoordEnd( targetEnd ), creationObject( create ), pushToActivate( pushActivation ) {}
-  Trigger( const Coord &start, const Coord &end, const Coord &targetStart, const Coord &targetEnd,
-           const ObstacleType &create, const bool &pushActivation, const bool &toggleable )
-      : triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
+  Trigger( const TriggerType &triggerType, const Coord &start, const Coord &end, const Coord &targetStart,
+           const Coord &targetEnd, const ObstacleType &create, const bool &pushActivation, const bool &toggleable )
+      : type( triggerType ), triggerCoordStart( start ), triggerCoordEnd( end ), targetCoordStart( targetStart ),
         targetCoordEnd( targetEnd ), creationObject( create ), pushToActivate( pushActivation ), toggle( toggleable ) {}
 
   Coord getTriggerStart() { return triggerCoordStart; }
@@ -193,7 +194,7 @@ public:
 class Enemy {
 public:
   Enemy() : position( 0, 0 ) {}
-  Enemy( Coord &Position ) : position( Position ) {}
+  Enemy( Coord &Position ) : position( Position.x, Position.y ) {}
   Enemy( Coord &Position, int &Health ) : position( Position ), health( Health ) {}
   Enemy( Coord &Position, bool &playerSpotted ) : position( Position ), seenPlayer( playerSpotted ) {}
   Enemy( Coord &Position, int &Health, bool &playerSpotted )
