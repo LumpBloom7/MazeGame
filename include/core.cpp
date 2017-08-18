@@ -3,6 +3,9 @@
 
 #include <fstream>
 #include <sys/stat.h>
+#include <algorithm>
+#include <chrono>
+#include <thread>
 #include "cereal/types/vector.hpp"
 #include "cereal/types/string.hpp"
 #include "cereal/archives/json.hpp"
@@ -21,6 +24,38 @@ namespace core {
       struct stat buffer;
       return ( stat( fileName.c_str(), &buffer ) == 0 );
     }
+  }
+
+  template <typename Iter, typename RandomGenerator> Iter randomSelect( Iter start, Iter end, RandomGenerator &g ) {
+    std::uniform_int_distribution<> dis( 0, std::distance( start, end ) - 1 );
+    std::advance( start, dis( g ) );
+    return start;
+  }
+
+  template <typename Iter> Iter randomSelect( Iter start, Iter end ) {
+    static std::random_device rd;
+    static std::mt19937 gen( rd() );
+    return randomSelect( start, end, gen );
+  }
+
+  void pause() {
+    std::cin.ignore();
+    std::cin.ignore();
+  }
+  void sleep( std::chrono::seconds seconds ) { std::this_thread::sleep_for( seconds ); }
+  void sleep( std::chrono::milliseconds milliseconds ) { std::this_thread::sleep_for( milliseconds ); }
+  void sadisticInsult() {
+    std::vector<std::string> insults{
+        "It's that the best you've got? Little bitch!",
+        "Well, I knew that you are an idiot, but being unable to use this softare correctly? you just reached a new "
+        "level of stupidity!!",
+        "Should I make a SUPER EASY BABY mode? Contact me at FUCKYOURSELF@outlook.com.",
+        "Sighhhh....",
+        "Let's face it, you're not up for it.. Just quit while you're still can!",
+        "You want to know why I do not have any sort of metrics system in this? It's because my server hosting plan "
+        "can't handle the amount of bullshit you send through!"};
+    std::string selection = *randomSelect( insults.begin(), insults.end() );
+    std::cout << selection << std::endl;
   }
   void save() // Serialize namespace player, you can change this to another namespace or object
   {

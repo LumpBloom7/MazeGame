@@ -1,6 +1,13 @@
 Geocaching Maze changelogs
 ===========================
 
+#### 18/08/2017
+ * [+] Overhauled maze rendering system. Now it properly renders Mazes with a width and height larger than the console limits. It will also not draw excess areas that exceed console boundaries.
+ * [+] Added ```sleep``` function in core.cpp. Used to pause the program for a period of time in seconds and milliseconds.
+ * [+] Added about screen.
+ * [-] Removed some unused functions in core.cpp
+ * [-] Removed unneeded comments.
+
 #### 24/07/2017
  * [+] ```core::createMenu()``` now uses switch cases to get key input and do the appropriate stuff.
  * [+] ```getArrowInput()``` had now been renamed to ```getKeyInput()``` to accurately match its actual function.

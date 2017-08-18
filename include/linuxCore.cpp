@@ -1,3 +1,7 @@
+/*
+ * Implementation of basic functionality exclusive to the Linux operating systems
+*/
+
 #include <sys/ioctl.h>
 #include <termios.h>
 #include <cstdlib>
@@ -36,20 +40,7 @@ namespace core {
       std::string password = getpass( prompt );
       return password;
     }
-    void executeCommand( const char &command ) {
-      // system(command);
-    }
   }
-  void save() // Serialize namespace player, you can change this to another namespace or object
-  {
-    std::string password;
-    std::ofstream os( ( "saveData/" + player::userName + ".json" ) );
-    cereal::JSONOutputArchive archive( os );
-
-    archive( CEREAL_NVP( player::userName ), CEREAL_NVP( player::password ),
-             CEREAL_NVP( player::experience ) ); // Names the output the same as the variable name
-  }
-
   void clear() // This is used to clear the screen and reset any formatting changes.
   {
     std::cout << "\x1B[2J\x1B[H";
@@ -90,10 +81,7 @@ namespace core {
     }
   }
 
-  int createMenu( const std::string &title, const std::vector<std::string> &menuContent,
-                  const bool &backEnabled ) // Creates a menu without using the nCurses library, not likely to be
-  // efficient. Still needs linux code.
-  {
+  int createMenu( const std::string &title, const std::vector<std::string> &menuContent, const bool &backEnabled ) {
     core::clear();
     int numberOfOptions = menuContent.size() - 1;
     int pointerCoord = 0;

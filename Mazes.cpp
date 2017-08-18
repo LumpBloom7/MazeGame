@@ -39,7 +39,40 @@ void mazeParser( Maze &input ) {
   parsedMaze[ endPos.y ][ endPos.x ] = 'e';
 }
 void optimizeMaze();
-void renderMaze() {
+void renderMaze() { // New experimental render system.
+  core::clear();
+  // Prepare int with console height and width so we do not call the function everytime.
+  int consoleHeight = core::console::getConsoleHeight();
+  int consoleWidth = core::console::getConsoleWidth();
+
+  // Used to trim off excess areas that exceed the left and top boundaries of console.
+  int cutX = 0, cutY = 0;
+  if ( playerPos.y / ( consoleHeight / 2 ) > 0 ) {
+    cutY = ( ( consoleHeight ) * ( playerPos.y / ( consoleHeight / 2 ) ) ) -
+           ( ( consoleHeight ) - ( playerPos.y % ( consoleHeight / 2 ) ) );
+  }
+  if ( playerPos.x / ( consoleWidth / 2 ) > 0 ) {
+    cutX = ( ( consoleWidth / 2 ) * ( playerPos.x / ( consoleWidth / 2 ) ) ) -
+           ( ( consoleWidth / 2 ) - ( playerPos.x % ( consoleWidth / 2 ) ) );
+  }
+
+  // Render maze with player being at the center of the console
+  for ( int o = 0; o < ( consoleHeight / 2 ) - playerPos.y; o++ ) { std::cout << std::endl; }
+  for ( int y = 0 + cutY; y < parsedMaze.size() && y < ( consoleHeight / 2 ) + playerPos.y; y++ ) {
+    for ( int o = 0; o < ( consoleWidth / 2 ) - playerPos.x; o++ ) { std::cout << ' ' << std::flush; }
+    for ( int x = 0 + cutX; x < parsedMaze[ y ].size() && x < ( consoleWidth / 2 ) + playerPos.x - 1; x++ ) {
+      if ( playerPos.x == x && playerPos.y == y ) {
+        std::cout << "@" << std::flush;
+      } else if ( parsedMaze[ y ][ x ] == ' ' ) {
+        std::cout << ' ' << std::flush;
+      } else {
+        std::cout << parsedMaze[ y ][ x ] << std::flush;
+      }
+    }
+    std::cout << std::endl;
+  }
+}
+void renderMaze2() { // Soon to be forgotten..
   core::clear();
   for ( int y = 0; y < parsedMaze.size(); y++ ) {
     for ( int x = 0; x < parsedMaze[ y ].size(); x++ ) {

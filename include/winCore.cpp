@@ -1,3 +1,7 @@
+/*
+ * Implementation of basic functionality exclusive to the Windows operating system
+*/
+
 #include "windows.h"
 #include <limits.h>
 
@@ -150,6 +154,9 @@ namespace core {
         break;
       }
       case Keys::enter: {
+        return pointerCoord;
+      }
+      case Keys::right: {
         return pointerCoord;
       }
       case Keys::escape: {

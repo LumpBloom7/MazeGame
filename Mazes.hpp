@@ -190,38 +190,15 @@ public:
     // a = move
   }
 };
-
+enum Direction { up, fown, left, right };
 class Enemy {
 public:
   Enemy() : position( 0, 0 ) {}
-  Enemy( Coord &Position ) : position( Position.x, Position.y ) {}
+  explicit Enemy( Coord &Position ) : position( Position.x, Position.y ) {}
   Enemy( Coord &Position, int &Health ) : position( Position ), health( Health ) {}
   Enemy( Coord &Position, bool &playerSpotted ) : position( Position ), seenPlayer( playerSpotted ) {}
   Enemy( Coord &Position, int &Health, bool &playerSpotted )
       : position( Position ), health( Health ), seenPlayer( playerSpotted ) {}
-  /*void solvemaze() { // Make the move (if it's wrong, we will backtrack later.
-    Maze[ Y ][ X ] = SomeDude;
-
-    // If you want progressive update, uncomment these lines...
-    // PrintDaMaze();
-    // Sleep(50);
-
-    // Check if we have reached our goal.
-    if ( X == EndingPoint.X && Y == EndingPoint.Y ) { return true; }
-
-    // Recursively search for our goal.
-    if ( X > 0 && Maze[ Y ][ X - 1 ] == Free && Solve( X - 1, Y ) ) { return true; }
-    if ( X < MazeWidth && Maze[ Y ][ X + 1 ] == Free && Solve( X + 1, Y ) ) { return true; }
-    if ( Y > 0 && Maze[ Y - 1 ][ X ] == Free && Solve( X, Y - 1 ) ) { return true; }
-    if ( Y < MazeHeight && Maze[ Y + 1 ][ X ] == Free && Solve( X, Y + 1 ) ) { return true; }
-
-    // Otherwise we need to backtrack and find another solution.
-    Maze[ Y ][ X ] = Free;
-    // If you want progressive update, uncomment these lines...
-    // PrintDaMaze();
-    // Sleep(50);
-    return false;
-  }*/
 
 private:
   Coord position;
@@ -229,6 +206,7 @@ private:
   int damageMultiplier = 1;
   int defenseMultiplier = 1;
   bool seenPlayer = false;
+  std::vector<Direction> currentPath;
 };
 class PathfindingMap {};
 

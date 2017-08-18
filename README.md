@@ -9,6 +9,13 @@ This is a game created as the first challenge for a cache in Geocaching. It is a
 Latest update
 ==========
 
+#### 18/08/2017
+ * [+] Overhauled maze rendering system. Now it properly renders Mazes with a width and height larger than the console limits. It will also not draw excess areas that exceed console boundaries.
+ * [+] Added ```sleep``` function in core.cpp. Used to pause the program for a period of time in seconds and milliseconds.
+ * [+] Added about screen.
+ * [-] Removed some unused functions in core.cpp
+ * [-] Removed unneeded comments.
+
 #### 24/07/2017
  * [+] ```core::createMenu()``` now uses switch cases to get key input and do the appropriate stuff.
  * [+] ```getArrowInput()``` had now been renamed to ```getKeyInput()``` to accurately match its actual function.
@@ -18,10 +25,5 @@ Latest update
 
 #### 22/07/2017
  * [+] Made maze controls use the new ```getArrowInput()``` function.
-
-#### 21/07/2017
- * [+] Tidied up core.cpp. All OS specific calls are now in their own independent code files and is appropriately called during compilation.
- * [+] Menus should now work on Linux since the Linux code to get arrow key input is implemented.
- * [+] Arrow key input is now handled by ```core::getArrowInput()```.
 
  Full changelogs can be found in CHANGELOGS.md
