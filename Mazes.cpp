@@ -18,12 +18,12 @@ void mazeParser( Maze &input ) {
   parsedMaze = temp;
   // Create borders.
   for ( int a = 0; a < input.getHeight() + 2; a++ ) {
-    parsedMaze[ a ][ 0 ] = '|';
-    parsedMaze[ a ][ input.getWidth() + 1 ] = '|';
+    parsedMaze[ a ][ 0 ] = 'w';
+    parsedMaze[ a ][ input.getWidth() + 1 ] = 'w';
   }
   for ( int a = 0; a < input.getWidth() + 2; a++ ) {
-    parsedMaze[ 0 ][ a ] = '-';
-    parsedMaze[ input.getHeight() + 1 ][ a ] = '-';
+    parsedMaze[ 0 ][ a ] = 'w';
+    parsedMaze[ input.getHeight() + 1 ][ a ] = 'w';
   }
 
   // Generate maze using data provided.
@@ -42,25 +42,23 @@ void optimizeMaze();
 void renderMaze() { // New experimental render system.
   core::clear();
   // Prepare int with console height and width so we do not call the function everytime.
-  int consoleHeight = core::console::getConsoleHeight();
-  int consoleWidth = core::console::getConsoleWidth();
+  int halfHeight = core::console::getConsoleHeight() / 2;
+  int halfWidth = core::console::getConsoleWidth() / 2;
 
   // Used to trim off excess areas that exceed the left and top boundaries of console.
   int cutX = 0, cutY = 0;
-  if ( playerPos.y / ( consoleHeight / 2 ) > 0 ) {
-    cutY = ( ( consoleHeight ) * ( playerPos.y / ( consoleHeight / 2 ) ) ) -
-           ( ( consoleHeight ) - ( playerPos.y % ( consoleHeight / 2 ) ) );
+  if ( playerPos.y / ( halfHeight ) > 0 ) {
+    cutY = ( ( halfHeight ) * ( playerPos.y / halfHeight ) ) - ( ( halfHeight ) - ( playerPos.y % halfHeight ) );
   }
-  if ( playerPos.x / ( consoleWidth / 2 ) > 0 ) {
-    cutX = ( ( consoleWidth / 2 ) * ( playerPos.x / ( consoleWidth / 2 ) ) ) -
-           ( ( consoleWidth / 2 ) - ( playerPos.x % ( consoleWidth / 2 ) ) );
+  if ( playerPos.x / ( halfWidth ) > 0 ) {
+    cutX = ( ( halfWidth ) * ( playerPos.x / halfWidth ) ) - ( ( halfWidth ) - ( playerPos.x % halfWidth ) );
   }
 
   // Render maze with player being at the center of the console
-  for ( int o = 0; o < ( consoleHeight / 2 ) - playerPos.y; o++ ) { std::cout << std::endl; }
-  for ( int y = 0 + cutY; y < parsedMaze.size() && y < ( consoleHeight / 2 ) + playerPos.y; y++ ) {
-    for ( int o = 0; o < ( consoleWidth / 2 ) - playerPos.x; o++ ) { std::cout << ' ' << std::flush; }
-    for ( int x = 0 + cutX; x < parsedMaze[ y ].size() && x < ( consoleWidth / 2 ) + playerPos.x - 1; x++ ) {
+  for ( int o = 0; o < (halfHeight)-playerPos.y; o++ ) { std::cout << std::endl; }
+  for ( int y = 0 + cutY; y < parsedMaze.size() && y < ( halfHeight ) + playerPos.y; y++ ) {
+    for ( int o = 0; o < (halfWidth)-playerPos.x; o++ ) { std::cout << ' ' << std::flush; }
+    for ( int x = 0 + cutX; x < parsedMaze[ y ].size() && x < ( halfWidth ) + playerPos.x - 1; x++ ) {
       if ( playerPos.x == x && playerPos.y == y ) {
         std::cout << "@" << std::flush;
       } else if ( parsedMaze[ y ][ x ] == ' ' ) {
@@ -99,7 +97,6 @@ int mazeGame() {
         std::cout << termcolor::green << "You win!!!" << std::endl;
         break;
       }
-
     } else if ( input == core::Keys::down && failcheck ) {
       playerPos = moveDown( playerPos );
       renderMaze();

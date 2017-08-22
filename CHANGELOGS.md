@@ -1,6 +1,9 @@
 Geocaching Maze changelogs
 ===========================
 
+#### 22/08/2017
+ * [+] Fix minor math issue in maze rendering system.
+
 #### 18/08/2017
  * [+] Overhauled maze rendering system. Now it properly renders Mazes with a width and height larger than the console limits. It will also not draw excess areas that exceed console boundaries.
  * [+] Added ```sleep``` function in core.cpp. Used to pause the program for a period of time in seconds and milliseconds.

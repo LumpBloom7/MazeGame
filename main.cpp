@@ -31,8 +31,6 @@ void workInProgress() {
   main();
 }
 void newGame() {
-  std::cout << termcolor::cyan << "Sorry, but this area is still a work in progress. Please check back soon. :)"
-            << std::endl;
   workInProgress();
   core::pause();
 }
@@ -88,9 +86,7 @@ void debugMode() {
   test.addObstacle( 't', Coord( 1, 2 ), Coord( 1, 2 ), Coord( 5, 5 ) );
   mazeParser( test );
   mazeGame();
-  core::sadisticInsult();
   core::pause();
   std::cout << termcolor::reset;
-
   main();
 }
