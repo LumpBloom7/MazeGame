@@ -5,8 +5,11 @@ Geocaching Maze
 
 This is a game created as the first challenge for a cache in Geocaching. It is a maze game where the goal is to find the Geocache in the maze while avoiding obstacles and difficulties. There are a total of 10 mazes and a code will be given afterwards for the second challenge.
 
-
+Changelogs
 ==========
+
+#### 19/09/2017
+ * [+] Added demo recording and demo playback. Can be accessed in the new debug menu.
 
 #### 22/08/2017
  * [+] Fix minor math issue in maze rendering system.
@@ -17,12 +20,5 @@ This is a game created as the first challenge for a cache in Geocaching. It is a
  * [+] Added about screen.
  * [-] Removed some unused functions in core.cpp
  * [-] Removed unneeded comments.
-
-#### 24/07/2017
- * [+] ```core::createMenu()``` now uses switch cases to get key input and do the appropriate stuff.
- * [+] ```getArrowInput()``` had now been renamed to ```getKeyInput()``` to accurately match its actual function.
- * [+] The ```ArrowKeys``` enumerator has been renamed to ```Keys``` because it does not only contain arrowKeys.
- * [+] Fixed ```Trigger::type``` not being initialized in constructors.
- * [+] Fixed up minor code styling inconsistencies.
 
  Full changelogs can be found in CHANGELOGS.md

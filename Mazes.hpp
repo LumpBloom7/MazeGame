@@ -190,7 +190,7 @@ public:
     // a = move
   }
 };
-enum Direction { up, fown, left, right };
+enum Direction { up, down, left, right, null };
 class Enemy {
 public:
   Enemy() : position( 0, 0 ) {}

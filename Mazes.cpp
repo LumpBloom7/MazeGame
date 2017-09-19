@@ -4,6 +4,7 @@ Coord endPos{};
 Coord finishPos{};
 std::vector<std::vector<char>> parsedMaze;
 std::vector<MazeObstacle> teleporters;
+std::vector<Direction> record;
 
 void mazeParser( Maze &input ) {
   playerPos = Coord( input.getStartPos().x + 1, input.getStartPos().y + 1 );
@@ -70,27 +71,59 @@ void renderMaze() { // New experimental render system.
     std::cout << std::endl;
   }
 }
-void renderMaze2() { // Soon to be forgotten..
-  core::clear();
-  for ( int y = 0; y < parsedMaze.size(); y++ ) {
-    for ( int x = 0; x < parsedMaze[ y ].size(); x++ ) {
-      if ( playerPos.x == x && playerPos.y == y ) {
-        std::cout << "@" << std::flush;
-      } else if ( parsedMaze[ y ][ x ] == ' ' ) {
-        std::cout << ' ' << std::flush;
-      } else {
-        std::cout << parsedMaze[ y ][ x ] << std::flush;
+void demoPlayback() {
+  renderMaze();
+  if ( core::filesystem::fileExists( "demo.json" ) ) {
+    std::ifstream is( "demo.json" );
+    cereal::JSONInputArchive archive( is );
+    archive( record );
+    for ( int a = 0; a < record.size(); a++ ) {
+      core::sleep( std::chrono::milliseconds( 100 ) );
+      if ( record[ a ] == Direction::up ) {
+        playerPos = moveUp( playerPos );
+        renderMaze();
+        if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
+          std::cout << termcolor::green << "You win!!!" << std::endl;
+          break;
+        }
+      } else if ( record[ a ] == Direction::down ) {
+        playerPos = moveDown( playerPos );
+        renderMaze();
+        if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
+          std::cout << termcolor::green << "You win!!!" << std::endl;
+          break;
+        }
+      } else if ( record[ a ] == Direction::left ) {
+        playerPos = moveLeft( playerPos );
+        renderMaze();
+        if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
+          std::cout << termcolor::green << "You win!!!" << std::endl;
+          break;
+        }
+      } else if ( record[ a ] == Direction::right ) {
+        playerPos = moveRight( playerPos );
+        renderMaze();
+        if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
+          std::cout << termcolor::green << "You win!!!" << std::endl;
+          break;
+        }
+      }
+
+      if ( a == record.size() - 1 ) {
+        std::cout << "Demo playback complete" << std::endl;
+        core::pause();
       }
     }
-    std::cout << std::endl;
   }
 }
 int mazeGame() {
+  record = {};
   renderMaze();
   bool failcheck{};
   while ( true ) {
     core::Keys input = core::getKeyInput();
     if ( input == core::Keys::up && failcheck ) {
+      record.push_back( Direction::up );
       playerPos = moveUp( playerPos );
       renderMaze();
       if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
@@ -98,6 +131,7 @@ int mazeGame() {
         break;
       }
     } else if ( input == core::Keys::down && failcheck ) {
+      record.push_back( Direction::down );
       playerPos = moveDown( playerPos );
       renderMaze();
       if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
@@ -105,6 +139,7 @@ int mazeGame() {
         break;
       }
     } else if ( input == core::Keys::left && failcheck ) {
+      record.push_back( Direction::left );
       playerPos = moveLeft( playerPos );
       renderMaze();
       if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
@@ -112,6 +147,7 @@ int mazeGame() {
         break;
       }
     } else if ( input == core::Keys::right && failcheck ) {
+      record.push_back( Direction::right );
       playerPos = moveRight( playerPos );
       renderMaze();
       if ( parsedMaze[ playerPos.y ][ playerPos.x ] == 'e' ) {
@@ -120,6 +156,13 @@ int mazeGame() {
       }
     }
     failcheck = true;
+  }
+  std::vector<std::string> a{"Yes", "No"};
+  int demo = core::createMenu( "Save demo?", a, false );
+  if ( demo == 0 ) {
+    std::ofstream os( ( "demo.json" ) );
+    cereal::JSONOutputArchive archive( os );
+    archive( CEREAL_NVP( record ) ); // Names the output the same as the variable name6
   }
 }
 Coord moveUp( const Coord &playerPos ) {

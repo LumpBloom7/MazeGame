@@ -1,6 +1,9 @@
 Geocaching Maze changelogs
 ===========================
 
+#### 19/09/2017
+ * [+] Added demo recording and demo playback. Can be accessed in the new debug menu.
+
 #### 22/08/2017
  * [+] Fix minor math issue in maze rendering system.
 

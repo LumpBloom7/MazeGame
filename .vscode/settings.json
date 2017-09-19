@@ -42,6 +42,8 @@
         "streambuf": "cpp",
         "system_error": "cpp",
         "typeindex": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "random": "cpp",
+        "vector": "cpp"
     }
 }

@@ -10,8 +10,9 @@
 
 void newGame(), continueGame(), showInstructions(), workInProgress(), errorMessage(), debugMode(), aboutText();
 int main() {
-  std::vector<std::string> a{"1. New game", "2. Continue", "3. Instruction", "4. Geocache URL",
-                             "5. About",    "6. Quit",     "7. Debug"};
+  std::vector<std::string> a = {"1. New game", "2. Continue", "3. Instruction", "4. Geocache URL",
+                                "5. About",    "6. Quit",     "7. Debug"};
+
   int response = core::createMenu( "Main menu", a, false );
   switch ( response ) {
   case 0: newGame(); break;
@@ -78,14 +79,21 @@ void errorMessage() {
   main();
 }
 void debugMode() {
-  core::clear();
   Maze test = Maze( 10000, 10000, Coord( 0, 0 ), Coord( 3, 6 ) );
   test.addObstacle( 'w', Coord( 1, 2 ), Coord( 1, 4 ) );
   test.addObstacle( 'w', Coord( 4, 0 ), Coord( 4, 4 ) );
   test.addObstacle( 'w', Coord( 3, 2 ), Coord( 3, 3 ) );
   test.addObstacle( 't', Coord( 1, 2 ), Coord( 1, 2 ), Coord( 5, 5 ) );
   mazeParser( test );
-  mazeGame();
+  std::vector<std::string> a{"1. Test maze", "2. Test demo functionality"};
+  int b = core::createMenu( "Choose a test", a, false );
+  if ( b == 0 ) {
+    core::clear();
+    mazeGame();
+  } else if ( b == 1 ) {
+    core::clear();
+    demoPlayback();
+  }
   core::pause();
   std::cout << termcolor::reset;
   main();
