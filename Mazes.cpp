@@ -40,7 +40,8 @@ void mazeParser( Maze &input ) {
   parsedMaze[ endPos.y ][ endPos.x ] = 'e';
 }
 void optimizeMaze();
-void renderMaze() { // New experimental render system.
+void renderMaze() { // New experimental render system. So far renders one extra
+		    // line on 1366x768 resolution
   core::clear();
   // Prepare int with console height and width so we do not call the function everytime.
   int halfHeight = core::console::getConsoleHeight() / 2;
@@ -58,8 +59,9 @@ void renderMaze() { // New experimental render system.
   // Render maze with player being at the center of the console
   for ( int o = 0; o < (halfHeight)-playerPos.y; o++ ) { std::cout << std::endl; }
   for ( int y = 0 + cutY; y < parsedMaze.size() && y < ( halfHeight ) + playerPos.y; y++ ) {
+
     for ( int o = 0; o < (halfWidth)-playerPos.x; o++ ) { std::cout << ' ' << std::flush; }
-    for ( int x = 0 + cutX; x < parsedMaze[ y ].size() && x < ( halfWidth ) + playerPos.x - 1; x++ ) {
+    for ( int x = 0 + cutX; x < parsedMaze[ y ].size() && x < ( halfWidth ) - +playerPos.x - 1; x++ ) {
       if ( playerPos.x == x && playerPos.y == y ) {
         std::cout << "@" << std::flush;
       } else if ( parsedMaze[ y ][ x ] == ' ' ) {

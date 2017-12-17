@@ -1,6 +1,6 @@
 /*
  * Implementation of basic functionality exclusive to the Linux operating systems
-*/
+ */
 
 #include <sys/ioctl.h>
 #include <termios.h>
@@ -40,7 +40,7 @@ namespace core {
       std::string password = getpass( prompt );
       return password;
     }
-  }
+  }            // namespace console
   void clear() // This is used to clear the screen and reset any formatting changes.
   {
     std::cout << "\x1B[2J\x1B[H";
@@ -97,7 +97,7 @@ namespace core {
       switch ( getArrowInput() ) {
       case Keys::up: {
         pointerCoord--;
-        if ( pointerCoord < 0 ) { pointerCoord = numberOfOptions; }
+        pointerCoord = ( pointerCoord < 0 ) ? numberOfOptions : pointerCoord;
         core::clear();
         std::cout << termcolor::bold << termcolor::underline << title << termcolor::reset << std::endl;
         for ( int a = 0; a < menuContent.size(); a++ ) {
@@ -108,7 +108,7 @@ namespace core {
       }
       case Keys::down: {
         pointerCoord++;
-        if ( pointerCoord > numberOfOptions ) { pointerCoord = 0; }
+        pointerCoord = (( pointerCoord > numberOfOptions ) ? 0 : pointerCoord;
         core::clear();
         std::cout << termcolor::bold << termcolor::underline << title << termcolor::reset << std::endl;
         for ( int a = 0; a < menuContent.size(); a++ ) {
@@ -127,4 +127,4 @@ namespace core {
     }
     return -1;
   }
-}
+} // namespace core

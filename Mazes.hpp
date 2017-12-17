@@ -5,77 +5,17 @@ public:
   Coord() {}
 
   // Since the maze reads maze coordinates from the top left, it is pointless to compare reverse scenarios.
-  bool operator>( const Coord &b ) {
-    if ( ( this->x > b.x ) && ( this->y > b.y ) ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  bool operator>=( const Coord &b ) {
-    if ( ( this->x >= b.x ) && ( this->y >= b.y ) ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  bool operator<( const Coord &b ) {
-    if ( ( this->x < b.x ) && ( this->y < b.y ) ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  bool operator<=( const Coord &b ) {
-    if ( ( this->x <= b.x ) && ( this->y <= b.y ) ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  bool operator==( const Coord &b ) {
-    if ( ( this->x == b.x ) && ( this->y == b.y ) ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  Coord operator-( const Coord &b ) {
-    Coord temp;
-    temp.x = this->x - b.x;
-    temp.y = this->x - b.y;
-    return temp;
-  }
-  Coord operator-( const int b ) {
-    Coord temp;
-    temp.x = this->x - b;
-    temp.y = this->x - b;
-    return temp;
-  }
-  Coord operator+( const Coord &b ) {
-    Coord temp;
-    temp.x = this->x + b.x;
-    temp.y = this->x + b.y;
-    return temp;
-  }
-  Coord operator+( const int b ) {
-    Coord temp;
-    temp.x = this->x + b;
-    temp.y = this->x + b;
-    return temp;
-  }
-  Coord operator++() {
-    Coord temp;
-    temp.x = this->x + 1;
-    temp.y = this->y + 1;
-    return temp;
-  }
-  Coord operator--() {
-    Coord temp;
-    temp.x = this->x + 1;
-    temp.y = this->y + 1;
-    return temp;
-  }
+  bool operator>( const Coord &b ) { return ( ( this->x > b.x && this->y > b.y ) ? true : false ); }
+  bool operator>=( const Coord &b ) { return ( ( this->x >= b.x && this->y >= b.y ) ? true : false ); }
+  bool operator<( const Coord &b ) { return ( ( this->x < b.x && this->y < b.y ) ? true : false ); }
+  bool operator<=( const Coord &b ) { return ( ( this->x <= b.x && this->y <= b.y ) ? true : false ); }
+  bool operator==( const Coord &b ) { return ( ( this->x == b.x && this->y == b.y ) ? true : false ); }
+  Coord operator-( const Coord &b ) { return Coord( this->x - b.x, this->y - b.y ); }
+  Coord operator-( const int b ) { return Coord( this->x - b, this->y - b ); }
+  Coord operator+( const Coord &b ) { return Coord( this->x + b.x, this->y + b.y ); }
+  Coord operator+( const int b ) { return Coord( this->x + b, this->y + b ); }
+  Coord operator++() { return Coord( this->x + 1, this->y + 1 ); }
+  Coord operator--() { return Coord( this->x - 1, this->y - 1 ); }
   int x, y;
 };
 enum ObstacleType { wall = 0, spike = 1, enemy = 2 };

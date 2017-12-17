@@ -133,7 +133,7 @@ namespace core {
       switch ( getKeyInput() ) {
       case Keys::up: {
         pointerCoord--;
-        if ( pointerCoord < 0 ) { pointerCoord = numberOfOptions; }
+        pointerCoord = ( pointerCoord < 0 ) ? numberOfOptions : pointerCoord;
         core::clear();
         std::cout << title << termcolor::reset << std::endl;
         for ( int a = 0; a < menuContent.size(); a++ ) {
@@ -144,7 +144,7 @@ namespace core {
       }
       case Keys::down: {
         pointerCoord++;
-        if ( pointerCoord > numberOfOptions ) { pointerCoord = 0; }
+        pointerCoord = ( pointerCoord > numberOfOptions ) ? 0 : pointerCoord;
         core::clear();
         std::cout << title << termcolor::reset << std::endl;
         for ( int a = 0; a < menuContent.size(); a++ ) {
