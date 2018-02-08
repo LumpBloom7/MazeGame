@@ -61,7 +61,7 @@ void renderMaze() { // New experimental render system. So far renders one extra
   for ( int y = 0 + cutY; y < parsedMaze.size() && y < ( halfHeight ) + playerPos.y; y++ ) {
 
     for ( int o = 0; o < (halfWidth)-playerPos.x; o++ ) { std::cout << ' ' << std::flush; }
-    for ( int x = 0 + cutX; x < parsedMaze[ y ].size() && x < ( halfWidth ) - +playerPos.x - 1; x++ ) {
+    for ( int x = 0 + cutX; x < parsedMaze[ y ].size() && x < ( halfWidth ) + playerPos.x - 1; x++ ) {
       if ( playerPos.x == x && playerPos.y == y ) {
         std::cout << "@" << std::flush;
       } else if ( parsedMaze[ y ][ x ] == ' ' ) {
